@@ -4,6 +4,10 @@ from django.contrib.auth.models import User
 
 
 class Flat(models.Model):
+    class Meta:
+        verbose_name = 'квартира'
+        verbose_name_plural = 'квартиры'
+
     owner = models.CharField("ФИО владельца", max_length=200)
     owners_phonenumber = models.CharField("Номер владельца", max_length=20)
     created_at = models.DateTimeField("Когда создано объявление", default=timezone.now, db_index=True)
