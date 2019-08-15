@@ -10,10 +10,13 @@ def fill_owners_phone_pure_field(apps, schema_editor):
     all_flats = Flat.objects.all()
 
     for flat in all_flats:
-        flat.owners_phone_pure = phonenumbers.format_number(
-            numobj=phonenumbers.parse(flat.owners_phonenumber, 'RU'),
-            num_format=phonenumbers.PhoneNumberFormat.E164,
-        )
+        phone_number_object = phonenumbers.parse(flat.owners_phonenumber, 'RU')
+
+        if phonenumbers.is_valid_number(phone_number_object):
+            flat.owners_phone_pure = phonenumbers.format_number(
+                numobj=phone_number_object,
+                num_format=phonenumbers.PhoneNumberFormat.E164,
+            )
 
     Flat.objects.bulk_update(all_flats, ['owners_phone_pure'])
 
