@@ -11,6 +11,8 @@ class FlatAdmin(admin.ModelAdmin):
     list_editable = ('new_building',)
     list_filter = ('new_building',)
 
+    raw_id_fields = ('likes',)
+
 
 class CompliantAdmin(admin.ModelAdmin):
     raw_id_fields = ('author', 'flat')
