@@ -15,7 +15,7 @@ class FlatAdmin(admin.ModelAdmin):
 
 
 class CompliantAdmin(admin.ModelAdmin):
-    raw_id_fields = ('author', 'flat')
+    raw_id_fields = ('author', 'flat',)
 
 
 class OwnerAdmin(admin.ModelAdmin):

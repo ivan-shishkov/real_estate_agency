@@ -36,4 +36,5 @@ def show_flats(request):
         'active_town': town,
         'max_price': max_price,
         'min_price': min_price,
-        'new_building': new_building})
+        'new_building': new_building,
+    })
