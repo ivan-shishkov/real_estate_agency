@@ -3,7 +3,7 @@
 from django.db import migrations
 
 
-def fill_owner_model(apps, schema_editor):
+def fill_owners_table(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
     Owner = apps.get_model('property', 'Owner')
 
@@ -16,7 +16,7 @@ def fill_owner_model(apps, schema_editor):
         owner.flats.add(flat)
 
 
-def clear_owner_model(apps, schema_editor):
+def clear_owners_table(apps, schema_editor):
     Owner = apps.get_model('property', 'Owner')
 
     Owner.objects.all().delete()
@@ -29,5 +29,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(fill_owner_model, clear_owner_model),
+        migrations.RunPython(fill_owners_table, clear_owners_table),
     ]
