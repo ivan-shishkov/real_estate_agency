@@ -8,18 +8,12 @@ def fill_owners_table(apps, schema_editor):
     Owner = apps.get_model('property', 'Owner')
 
     for flat in Flat.objects.all():
-        owner = Owner.objects.create(
+        owner, _ = Owner.objects.get_or_create(
             full_name=flat.owner,
             phone_number=flat.owners_phonenumber,
             normalized_phone_number=flat.owners_phone_pure,
         )
-        owner.flats.add(flat)
-
-
-def clear_owners_table(apps, schema_editor):
-    Owner = apps.get_model('property', 'Owner')
-
-    Owner.objects.all().delete()
+        owner.flats.set([flat])
 
 
 class Migration(migrations.Migration):
@@ -29,5 +23,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(fill_owners_table, clear_owners_table),
+        migrations.RunPython(fill_owners_table),
     ]
